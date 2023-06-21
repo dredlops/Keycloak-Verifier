@@ -35,7 +35,7 @@ public class getCVE {
         URL url = new URL(URL_CVE);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setConnectTimeout(TIME_OUT);
+        //conn.setConnectTimeout(TIME_OUT);
         String response =resp.getResponse(conn);
         JSONObject json = new JSONObject(response);
         JSONObject cveJson = json.getJSONObject("response");
