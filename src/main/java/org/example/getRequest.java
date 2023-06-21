@@ -84,11 +84,12 @@ public class getRequest {
         return response.toString();
     }
 
-    private void getProperties() throws IOException {
+    public String getProperties() throws IOException {
         Properties prop = new Properties();
         FileInputStream ip = new FileInputStream(FILE);
         prop.load(ip);
         HOST=prop.getProperty("host");
+        return HOST;
     }
 }
 
