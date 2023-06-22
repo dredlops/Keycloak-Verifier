@@ -18,7 +18,7 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest() throws IOException {
-        getProperties();
+        setProperties();
     }
 
     public String getToken() throws IOException {
@@ -84,12 +84,16 @@ public class getRequest {
         return response.toString();
     }
 
-    public String getProperties() throws IOException {
+    private void setProperties() throws IOException {
         Properties prop = new Properties();
         FileInputStream ip = new FileInputStream(FILE);
         prop.load(ip);
         HOST=prop.getProperty("host");
+
+    }
+    public String getHost(){
         return HOST;
     }
+
 }
 
