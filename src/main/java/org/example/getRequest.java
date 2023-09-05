@@ -13,14 +13,22 @@ import java.util.Properties;
 public class getRequest {
 
     private static String HOST;
+    private static String CLIENT;
+    private static String PASSWORD;
+    private static String USERNAME;
 
     //private static final String FILE = ".properties";
     private static final String URL_TOKEN = "realms/master/protocol/openid-connect/token";
     private static final String URL_VERSION = "admin/serverinfo";
 
-    public getRequest() throws IOException {
-        HOST=System.getenv("HOST").toString();
+    public getRequest(String password, String username, String client, String host) throws IOException {
+        PASSWORD=password;
+        USERNAME=username;
+        CLIENT=client;
+        HOST=host;
     }
+
+    public getRequest(){}
 
     public String getToken() throws IOException {
         URL url = new URL(HOST+URL_TOKEN);
@@ -28,20 +36,18 @@ public class getRequest {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-        String jsonInputString = "username="+System.getenv("USERNAME")+"&password="+System.getenv("PASSWORD")+"&grant_type=password&client_id="+System.getenv("CLIENT");
+        String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
 
-        System.out.println("HOST: "+System.getenv("HOST"));
+        //System.out.println("HOST: "+System.getenv("HOST"));
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
         os.write(input, 0, input.length);
         os.flush();
         os.close();
-        System.out.println("CHEGUEI 1");
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
-        System.out.println("CHEGUEI 2");
         return token;
     }
 
