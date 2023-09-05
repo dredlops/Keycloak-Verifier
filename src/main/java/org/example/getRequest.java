@@ -1,6 +1,7 @@
 package org.example;
 
 
+
 import org.json.JSONObject;
 
 import java.io.*;
@@ -18,7 +19,7 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest() throws IOException {
-        HOST=System.getenv("HOST");
+        HOST=System.getenv("HOST").toString();
     }
 
     public String getToken() throws IOException {
@@ -36,11 +37,11 @@ public class getRequest {
         os.write(input, 0, input.length);
         os.flush();
         os.close();
-
+        System.out.println("CHEGUEI 1");
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
-
+        System.out.println("CHEGUEI 2");
         return token;
     }
 
