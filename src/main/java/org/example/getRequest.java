@@ -21,14 +21,14 @@ public class getRequest {
     private static final String URL_TOKEN = "realms/master/protocol/openid-connect/token";
     private static final String URL_VERSION = "admin/serverinfo";
 
-    public getRequest(String password, String username, String client, String host) throws IOException {
-        PASSWORD=password;
-        USERNAME=username;
-        CLIENT=client;
-        HOST=host;
+    public getRequest(){
+        PASSWORD=System.getenv("PASSWORD");
+        USERNAME=System.getenv("USERNAME");
+        CLIENT=System.getenv("CLIENT");
+        HOST=System.getenv("HOST");
     }
 
-    public getRequest(){}
+
 
     public String getToken() throws IOException {
         URL url = new URL(HOST+URL_TOKEN);
