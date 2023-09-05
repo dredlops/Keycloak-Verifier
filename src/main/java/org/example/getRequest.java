@@ -18,7 +18,7 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest() throws IOException {
-        HOST=System.getProperty("host");
+        HOST=System.getenv("HOST");
     }
 
     public String getToken() throws IOException {
@@ -27,7 +27,9 @@ public class getRequest {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-        String jsonInputString = "username="+System.getProperty("username")+"&password="+System.getProperty("password")+"&grant_type=password&client_id="+System.getProperty("admin-cli");
+        String jsonInputString = "username="+System.getenv("USERNAME")+"&password="+System.getenv("PASSWORD")+"&grant_type=password&client_id="+System.getenv("CLIENT");
+
+        System.out.println("HOST: "+System.getenv("HOST"));
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -38,8 +40,6 @@ public class getRequest {
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
-
-        System.out.println("GOT THE TOKEN!!");
 
         return token;
     }
