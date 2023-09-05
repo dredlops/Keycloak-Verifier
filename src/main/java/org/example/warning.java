@@ -1,6 +1,5 @@
 package org.example;
 
-import org.json.JSONObject;
 
 public class warning {
 
@@ -11,7 +10,7 @@ public class warning {
     category will be mapped as category
      */
     private enum severit {HIGH, LOW, NORMAL};
-    public void warning(){}
+    public warning(){}
 
     public String addWarning(String severity, String description, String solution, String cve){
         String[] temp=severity.split("\\.");

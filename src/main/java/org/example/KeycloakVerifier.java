@@ -27,15 +27,6 @@ public class KeycloakVerifier {
         produceReport.writeReport();
     }
 
-    public KeycloakVerifier(int timeOut, String versionInUse) throws IOException {
-        getVulnerabilityInRecords= new getVulnerabilityInRecords();
-        this.versionInUse=versionInUse;
-        getCVE getCVE = new getCVE(timeOut);
-        cves = getCVE.get();
-        verify();
-        produceReport.writeReport();
-    }
-
     private void verify() throws IOException {
         Iterator it= cves.iterator();
         JSONObject cve;

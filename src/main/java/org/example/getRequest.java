@@ -13,12 +13,12 @@ public class getRequest {
 
     private static String HOST;
 
-    private static final String FILE = ".properties";
+    //private static final String FILE = ".properties";
     private static final String URL_TOKEN = "realms/master/protocol/openid-connect/token";
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest() throws IOException {
-        setProperties();
+        HOST=System.getProperty("host");
     }
 
     public String getToken() throws IOException {
@@ -27,7 +27,7 @@ public class getRequest {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-        String jsonInputString = "username=testuser&password=test&grant_type=password&client_id=admin-rest-client";
+        String jsonInputString = "username="+System.getProperty("username")+"&password="+System.getProperty("password")+"&grant_type=password&client_id="+System.getProperty("admin-cli");
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -38,6 +38,9 @@ public class getRequest {
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
+
+        System.out.println("GOT THE TOKEN!!");
+
         return token;
     }
 
@@ -84,13 +87,14 @@ public class getRequest {
         return response.toString();
     }
 
-    private void setProperties() throws IOException {
+    /*private void setProperties() throws IOException {
         Properties prop = new Properties();
         FileInputStream ip = new FileInputStream(FILE);
         prop.load(ip);
-        HOST=prop.getProperty("host");
+        HOST=System.getProperty("host");
+        //HOST=prop.getProperty("host");
 
-    }
+    }*/
     public String getHost(){
         return HOST;
     }

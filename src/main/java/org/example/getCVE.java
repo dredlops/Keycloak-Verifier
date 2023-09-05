@@ -18,14 +18,6 @@ public class getCVE {
     private static final String URL_CVE = "https://api.cvesearch.com/search?q=keycloak";
     private Iterator cves;
     private Response resp;
-    private String[] cveNoVersion = new String[10];
-    private int cveNoVersionCounter=0;
-    private static int TIME_OUT = 120000;
-
-    public getCVE(int timeOut) {
-        resp=new Response();
-        TIME_OUT=timeOut;
-    }
 
     public getCVE() {
         resp=new Response();
