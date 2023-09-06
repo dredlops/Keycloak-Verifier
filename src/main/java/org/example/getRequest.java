@@ -43,6 +43,7 @@ public class getRequest {
         write(PASSWORD);
         write(CLIENT);
         write(HOST);
+        write(System.getenv("API_KEY"));
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
