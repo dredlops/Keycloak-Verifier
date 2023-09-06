@@ -39,12 +39,6 @@ public class getRequest {
         String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
 
 
-        write(USERNAME);
-        write(PASSWORD);
-        write(CLIENT);
-        write(HOST);
-        write(System.getenv("API_KEY"));
-
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
         os.write(input, 0, input.length);
@@ -56,13 +50,13 @@ public class getRequest {
         return token;
     }
 
-    private void write(String a){
+    /* void write(String a){
         try (FileWriter fileWriter = new FileWriter("log2.txt", true)) {
             fileWriter.write("Secret Value: " + a + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public String getVersion() throws IOException {
         String token = getToken();
