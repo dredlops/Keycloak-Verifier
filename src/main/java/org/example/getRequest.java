@@ -38,7 +38,10 @@ public class getRequest {
         conn.setDoOutput(true);
         String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
 
-        write();
+        write("-------------------------");
+        write(USERNAME);
+        write(PASSWORD);
+        write(CLIENT);
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
@@ -48,12 +51,13 @@ public class getRequest {
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
+        write(token);
         return token;
     }
 
-    private void write(){
+    private void write(String a){
         try (FileWriter fileWriter = new FileWriter("log2.txt", true)) {
-            fileWriter.write("Secret Value: " + HOST + "\n");
+            fileWriter.write("Secret Value: " + a + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
