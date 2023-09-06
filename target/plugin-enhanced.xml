@@ -105,7 +105,7 @@
       <requiresOnline>false</requiresOnline>
       <inheritedByDefault>true</inheritedByDefault>
       <phase>initialize</phase>
-      <implementation>org.example.Main</implementation>
+      <implementation>org.example.main</implementation>
       <language>java</language>
       <instantiationStrategy>per-lookup</instantiationStrategy>
       <executionStrategy>once-per-session</executionStrategy>
@@ -114,6 +114,24 @@
     </mojo>
   </mojos>
   <dependencies>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>credentials</artifactId>
+      <type>jar</type>
+      <version>2.1.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <type>jar</type>
+      <version>4.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.abego.treelayout</groupId>
+      <artifactId>org.abego.treelayout.core</artifactId>
+      <type>jar</type>
+      <version>1.0.1</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
@@ -749,18 +767,6 @@
       <artifactId>branch-api</artifactId>
       <type>jar</type>
       <version>2.1046.v0ca_37783ecc5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>credentials</artifactId>
-      <type>jar</type>
-      <version>1087.1089.v2f1b_9a_b_040e4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.antlr</groupId>
-      <artifactId>antlr4-runtime</artifactId>
-      <type>jar</type>
-      <version>4.9.3</version>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>

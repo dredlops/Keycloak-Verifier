@@ -22,10 +22,15 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-        PASSWORD=System.getenv("PASSWORD");
-        USERNAME=System.getenv("USERNAME");
-        CLIENT=System.getenv("CLIENT");
-        HOST=System.getenv("HOST");
+        //PASSWORD=System.getenv("PASSWORD");
+        //USERNAME=System.getenv("USERNAME");
+       // CLIENT=System.getenv("CLIENT");
+        //HOST=System.getenv("HOST");
+        PASSWORD="test";
+        USERNAME="testuser";
+        HOST="http://localhost:8084/";
+        CLIENT="admin-cli";
+
     }
 
 
@@ -38,10 +43,6 @@ public class getRequest {
         conn.setDoOutput(true);
         String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
 
-        write("-------------------------");
-        write(USERNAME);
-        write(PASSWORD);
-        write(CLIENT);
 
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);

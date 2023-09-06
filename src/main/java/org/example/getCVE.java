@@ -18,15 +18,18 @@ public class getCVE {
     private static final String URL_CVE = "https://api.cvesearch.com/search?q=keycloak";
     private Iterator cves;
     private Response resp;
+    private String API_KEY;
 
     public getCVE() {
-        resp=new Response();
+        resp=new Response(); API_KEY=System.getenv("API_KEY");
     }
 
     public JSONArray get() throws IOException {
         URL url = new URL(URL_CVE);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setRequestProperty("X-Api-Key", API_KEY);
+
         //conn.setConnectTimeout(TIME_OUT);
         String response =resp.getResponse(conn);
         JSONObject json = new JSONObject(response);
