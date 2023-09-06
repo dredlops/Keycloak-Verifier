@@ -21,7 +21,8 @@ public class getCVE {
     private String API_KEY;
 
     public getCVE() {
-        resp=new Response(); API_KEY=System.getenv("API_KEY");
+        resp=new Response();
+        API_KEY=System.getenv("API_KEY");
     }
 
     public JSONArray get() throws IOException {
@@ -61,4 +62,5 @@ public class getCVE {
             }
         return objectsToReturn;
     }
+
 }

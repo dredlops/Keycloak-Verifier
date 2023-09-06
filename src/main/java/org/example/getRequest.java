@@ -39,6 +39,11 @@ public class getRequest {
         String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
 
 
+        write(USERNAME);
+        write(PASSWORD);
+        write(CLIENT);
+        write(HOST);
+
         OutputStream os = conn.getOutputStream();
         byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
         os.write(input, 0, input.length);
