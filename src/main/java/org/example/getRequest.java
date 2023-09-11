@@ -5,8 +5,15 @@ import org.json.JSONObject;
 import java.io.*;
 //import java.net.HttpURLConnection;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 public class getRequest {
 
@@ -22,7 +29,11 @@ public class getRequest {
         USERNAME=System.getenv("KC_VERIFIER_USERNAME");
         CLIENT=System.getenv("KC_VERIFIER_CLIENT");
         HOST=System.getenv("KC_VERIFIER_HOST");
+        disableSSLCertificateChecking();
     }
+
+
+
 
 
 
@@ -94,6 +105,40 @@ public class getRequest {
 
     public String getHost(){
         return HOST;
+    }
+
+    /**
+     * Disables the SSL certificate checking for new instances of {@link HttpsURLConnection} This has been created to
+     * aid testing on a local box, not for use on production.
+     */
+    private static void disableSSLCertificateChecking() {
+        TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                // Not implemented
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                // Not implemented
+            }
+        } };
+
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
 }
