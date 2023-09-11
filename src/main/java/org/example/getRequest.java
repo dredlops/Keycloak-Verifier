@@ -1,14 +1,11 @@
 package org.example;
 
-
-
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
 
 public class getRequest {
 
@@ -16,8 +13,6 @@ public class getRequest {
     private static String CLIENT;
     private static String PASSWORD;
     private static String USERNAME;
-
-    //private static final String FILE = ".properties";
     private static final String URL_TOKEN = "realms/master/protocol/openid-connect/token";
     private static final String URL_VERSION = "admin/serverinfo";
 
@@ -49,14 +44,6 @@ public class getRequest {
         String token = obj.getString("access_token");
         return token;
     }
-
-    /* void write(String a){
-        try (FileWriter fileWriter = new FileWriter("log2.txt", true)) {
-            fileWriter.write("Secret Value: " + a + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public String getVersion() throws IOException {
         String token = getToken();
@@ -101,14 +88,6 @@ public class getRequest {
         return response.toString();
     }
 
-    /*private void setProperties() throws IOException {
-        Properties prop = new Properties();
-        FileInputStream ip = new FileInputStream(FILE);
-        prop.load(ip);
-        HOST=System.getProperty("host");
-        //HOST=prop.getProperty("host");
-
-    }*/
     public String getHost(){
         return HOST;
     }

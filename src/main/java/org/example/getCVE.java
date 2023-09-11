@@ -2,19 +2,17 @@ package org.example;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Iterator;
 
 /*
     Class used to make the request to the vulnerabilities DB and return a JSON array with the cve's with all the info
  */
 public class getCVE {
+
+    private static final String ERROR_MESSAGE = "Connection to cve search DB failed.";
     private static final String URL_CVE = "https://api.cvesearch.com/search?q=keycloak";
     private Iterator cves;
     private Response resp;
@@ -31,8 +29,14 @@ public class getCVE {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("X-Api-Key", API_KEY);
 
-        //conn.setConnectTimeout(TIME_OUT);
-        String response =resp.getResponse(conn);
+        String response="";
+        try {
+            response = resp.getResponse(conn);
+        } catch (Exception a){
+            System.out.println(ERROR_MESSAGE);
+            return new JSONArray();
+        }
+
         JSONObject json = new JSONObject(response);
         JSONObject cveJson = json.getJSONObject("response");
         return getAffectedCVEs(cveJson);

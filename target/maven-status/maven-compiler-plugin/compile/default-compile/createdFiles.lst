@@ -1,10 +1,10 @@
 org\example\vulnerabilityTwo.class
 org\example\produceReport.class
-org\example\warning$severit.class
 org\example\warning.class
 org\myNisNine\keycloakVerifier_maven_plugin\HelpMojo.class
 org\example\getRequest.class
 org\example\main.class
+org\example\warning$severity.class
 org\example\getVulnerabilityInRecords.class
 org\example\MyMojo.class
 org\example\Response.class

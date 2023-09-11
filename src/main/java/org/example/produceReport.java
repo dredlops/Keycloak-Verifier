@@ -11,7 +11,7 @@ import java.util.Iterator;
  */
 public class produceReport {
 
-    private static final String[] array = new String[5];
+    private static final String[] array = new String[25];
     private static FileWriter writer;
     private static int counter;
 

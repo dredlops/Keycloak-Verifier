@@ -28,6 +28,7 @@ public class KeycloakVerifier {
     }
 
     private void verify() throws IOException {
+        if(!cves.isEmpty()){
         Iterator it= cves.iterator();
         JSONObject cve;
         while (it.hasNext()) {
@@ -35,22 +36,23 @@ public class KeycloakVerifier {
             JSONObject aux = getVulnerabilityInRecords.getVulnerability(cve.getJSONObject("threat_intel").getJSONObject("general").get("cve").toString());
 
             if (aux == null) {
-                //Vulnerabilidades não existentes no ficheiro vulnerabilities.log
+                //Vulnerabilities missing on file vulnerabilities.log
                 analyzeUnknownCVE(cve);
             } else{
-                //vulnerabilidade existente no ficheiro vulnerabilities.log
+                //Vulnerabilities on file vulnerabilities.log
                 analyzeCVE(aux);
             }
+        }
+        } else {
+            analyzeWithNoCve();
         }
     }
 
 
+    //checks if are any vulnerabilities with this cve and version
     private void analyzeCVE(JSONObject cve) throws IOException {
-        //checks if are any vulnerabilities with this cve and version
         String good_version = cve.get("good_version").toString();
-        boolean var=isVersionInUseLessThen(good_version);
-        if(var){
-
+        if(isVersionInUseLessThen(good_version)){
             JSONObject jsonObject = getVulnerabilityInRecords.getVulnerability(cve.getString("cve"));
                 //vulnerability found on the vulnerabilities file
                 if(getVulnerabilityInRecords.hasVerificationAvailable(jsonObject.getString("cve").toString())){
@@ -72,7 +74,7 @@ public class KeycloakVerifier {
                             break;
                     }
                     if (isActive){
-                        //criar um warning com a info
+                        //Creates a warning
                         warning wrng = new warning();
                         String cveAux=cve.getString("cve");
 
@@ -81,8 +83,8 @@ public class KeycloakVerifier {
                         produceReport.add(warning);
                     }
                 } else{
-                    //este é o caso de não existir verificação possivel
-                    //neste caso apenas produzir um warning com a info do vulnerabilities.log
+                    //In this case there is no possible verification
+                    //only produces a warning with info from vulnerabilities.log
                     warning wrng = new warning();
                     String cveAux=cve.getString("cve");
                     String warning = wrng.addWarning(cve.getString("severity"),cve.getString("message"),cve.getString("solution"),cveAux);
@@ -181,6 +183,15 @@ public class KeycloakVerifier {
             }
         }
         return "";
+    }
+
+    //In case there is no connection to DB
+    //Gets all vulnerabilities in vulnerabilities.log and checks them against version in use
+    private void analyzeWithNoCve() throws IOException {
+        Iterator it =  getVulnerabilityInRecords.getAllVulnerabilities().iterator();
+        while (it.hasNext()){
+            analyzeCVE(((JSONObject) it.next()));
+        }
     }
 
 }
