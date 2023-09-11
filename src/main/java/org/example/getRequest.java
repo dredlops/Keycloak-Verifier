@@ -3,7 +3,8 @@ package org.example;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
+//import java.net.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -27,11 +28,14 @@ public class getRequest {
 
     public String getToken() throws IOException {
         URL url = new URL(HOST+URL_TOKEN);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
         String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
+
+
+
 
 
         OutputStream os = conn.getOutputStream();
@@ -48,7 +52,7 @@ public class getRequest {
     public String getVersion() throws IOException {
         String token = getToken();
         URL url = new URL(HOST+URL_VERSION);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + token);
 
@@ -59,7 +63,7 @@ public class getRequest {
         return version;
     }
 
-    private String getResponse(HttpURLConnection conn) {
+    private String getResponse(HttpsURLConnection conn) {
         BufferedReader in;
         String output;
 
