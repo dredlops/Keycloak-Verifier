@@ -18,7 +18,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
 import java.net.URLEncoder;
-import java.util.Arrays;
 
 public class getRequest {
 
@@ -30,16 +29,20 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
+
             PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
             USERNAME=System.getenv("KC_VERIFIER_USERNAME");
             CLIENT=System.getenv("KC_VERIFIER_CLIENT");
             HOST=System.getenv("KC_VERIFIER_HOST");
+
             disableSSLCertificateChecking();
+
 
             System.out.println("client=" + CLIENT);
             System.out.println("host=" + HOST);
             System.out.println("password=" + PASSWORD);
             System.out.println("username=" + USERNAME);
+
         }
 
 
@@ -47,18 +50,16 @@ public class getRequest {
 
 
 
-    public String getToken() throws IOException, URISyntaxException {
+    public String getToken() throws IOException{
         URL url = new URL(HOST+URL_TOKEN);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-        //conn.setInstanceFollowRedirects(false);
-        //URLEncoder.encode(USERNAME, "UTF-8");
+
+        conn.setRequestProperty("Accept","*/*");
+
         String jsonInputString = "username="+URLEncoder.encode(USERNAME, "UTF-8")+"&password="+URLEncoder.encode(PASSWORD, "UTF-8")+"&grant_type=password&client_id="+CLIENT;
-
-
-
 
 
         OutputStream os = conn.getOutputStream();
@@ -69,6 +70,8 @@ public class getRequest {
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
+
+
         return token;
     }
 
@@ -78,6 +81,8 @@ public class getRequest {
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + token);
+
+        conn.setRequestProperty("Accept","*/*");
 
         String response = getResponse(conn);
         JSONObject json = new JSONObject(response);

@@ -29,6 +29,8 @@ public class getCVE {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("X-Api-Key", API_KEY);
 
+        conn.setRequestProperty("Accept","*/*");
+
         String response="";
         try {
             response = resp.getResponse(conn);
