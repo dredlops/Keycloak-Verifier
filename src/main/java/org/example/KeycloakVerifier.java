@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Iterator;
 
 public class KeycloakVerifier {
@@ -17,7 +18,7 @@ public class KeycloakVerifier {
     private static produceReport produceReport;
 
 
-    public KeycloakVerifier( String versionInUse) throws IOException {
+    public KeycloakVerifier( String versionInUse) throws IOException, URISyntaxException {
         getVulnerabilityInRecords= new getVulnerabilityInRecords();
         produceReport = new produceReport();
         this.versionInUse=versionInUse;
@@ -27,7 +28,7 @@ public class KeycloakVerifier {
         produceReport.writeReport();
     }
 
-    private void verify() throws IOException {
+    private void verify() throws IOException, URISyntaxException {
         if(!cves.isEmpty()){
         Iterator it= cves.iterator();
         JSONObject cve;
@@ -50,7 +51,7 @@ public class KeycloakVerifier {
 
 
     //checks if are any vulnerabilities with this cve and version
-    private void analyzeCVE(JSONObject cve) throws IOException {
+    private void analyzeCVE(JSONObject cve) throws IOException, URISyntaxException {
         String good_version = cve.get("good_version").toString();
         if(isVersionInUseLessThen(good_version)){
             JSONObject jsonObject = getVulnerabilityInRecords.getVulnerability(cve.getString("cve"));
@@ -187,7 +188,7 @@ public class KeycloakVerifier {
 
     //In case there is no connection to DB
     //Gets all vulnerabilities in vulnerabilities.log and checks them against version in use
-    private void analyzeWithNoCve() throws IOException {
+    private void analyzeWithNoCve() throws IOException, URISyntaxException {
         Iterator it =  getVulnerabilityInRecords.getAllVulnerabilities().iterator();
         while (it.hasNext()){
             analyzeCVE(((JSONObject) it.next()));

@@ -20,7 +20,7 @@ public class getCVE {
 
     public getCVE() {
         resp=new Response();
-        API_KEY=System.getenv("API_KEY");
+        API_KEY=System.getenv("KC_VERIFIER_API_KEY");
     }
 
     public JSONArray get() throws IOException {

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -8,12 +10,15 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.net.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+
+import java.net.URLEncoder;
+import java.util.Arrays;
 
 public class getRequest {
 
@@ -25,25 +30,32 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-        PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
-        USERNAME=System.getenv("KC_VERIFIER_USERNAME");
-        CLIENT=System.getenv("KC_VERIFIER_CLIENT");
-        HOST=System.getenv("KC_VERIFIER_HOST");
-        disableSSLCertificateChecking();
-    }
+            PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
+            USERNAME=System.getenv("KC_VERIFIER_USERNAME");
+            CLIENT=System.getenv("KC_VERIFIER_CLIENT");
+            HOST=System.getenv("KC_VERIFIER_HOST");
+            disableSSLCertificateChecking();
+
+            System.out.println("client=" + CLIENT);
+            System.out.println("host=" + HOST);
+            System.out.println("password=" + PASSWORD);
+            System.out.println("username=" + USERNAME);
+        }
 
 
 
 
 
 
-    public String getToken() throws IOException {
+    public String getToken() throws IOException, URISyntaxException {
         URL url = new URL(HOST+URL_TOKEN);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-        String jsonInputString = "username="+USERNAME+"&password="+PASSWORD+"&grant_type=password&client_id="+CLIENT;
+        //conn.setInstanceFollowRedirects(false);
+        //URLEncoder.encode(USERNAME, "UTF-8");
+        String jsonInputString = "username="+URLEncoder.encode(USERNAME, "UTF-8")+"&password="+URLEncoder.encode(PASSWORD, "UTF-8")+"&grant_type=password&client_id="+CLIENT;
 
 
 
@@ -60,7 +72,7 @@ public class getRequest {
         return token;
     }
 
-    public String getVersion() throws IOException {
+    public String getVersion() throws IOException, URISyntaxException {
         String token = getToken();
         URL url = new URL(HOST+URL_VERSION);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
