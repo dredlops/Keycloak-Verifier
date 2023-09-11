@@ -17,10 +17,10 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-        PASSWORD=System.getenv("PASSWORD");
-        USERNAME=System.getenv("USERNAME");
-        CLIENT=System.getenv("CLIENT");
-        HOST=System.getenv("HOST");
+        PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
+        USERNAME=System.getenv("KC_VERIFIER_USERNAME");
+        CLIENT=System.getenv("KC_VERIFIER_CLIENT");
+        HOST=System.getenv("KC_VERIFIER_HOST");
     }
 
 
