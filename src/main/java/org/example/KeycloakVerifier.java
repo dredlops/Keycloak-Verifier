@@ -51,7 +51,7 @@ public class KeycloakVerifier {
 
 
     //checks if are any vulnerabilities with this cve and version
-    private void analyzeCVE(JSONObject cve) throws IOException, URISyntaxException {
+    private void analyzeCVE(JSONObject cve) throws IOException{
         String good_version = cve.get("good_version").toString();
         if(isVersionInUseLessThen(good_version)){
             JSONObject jsonObject = getVulnerabilityInRecords.getVulnerability(cve.getString("cve"));
@@ -79,8 +79,7 @@ public class KeycloakVerifier {
                         warning wrng = new warning();
                         String cveAux=cve.getString("cve");
 
-                        String warning = wrng.addWarning(getVulnerabilityInRecords.getValueOf(cveAux,"severity"), getVulnerabilityInRecords.getValueOf(cveAux,"message"),getVulnerabilityInRecords.getValueOf(cveAux,"solution"),cveAux );
-
+                        String warning = wrng.addWarning(cve.getString("severity"),cve.getString("message"),cve.getString("solution")+" to "+ cve.getString("good_version"),cveAux);
                         produceReport.add(warning);
                     }
                 } else{
@@ -88,7 +87,7 @@ public class KeycloakVerifier {
                     //only produces a warning with info from vulnerabilities.log
                     warning wrng = new warning();
                     String cveAux=cve.getString("cve");
-                    String warning = wrng.addWarning(cve.getString("severity"),cve.getString("message"),cve.getString("solution"),cveAux);
+                    String warning = wrng.addWarning(cve.getString("severity"),cve.getString("message"),cve.getString("solution")+" to "+ cve.getString("good_version"),cveAux);
                     produceReport.add(warning);
                 }
         }

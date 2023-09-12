@@ -1,11 +1,8 @@
 package org.example;
 
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONObject;
 
 import java.io.*;
-//import java.net.HttpURLConnection;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -36,12 +33,6 @@ public class getRequest {
             HOST=System.getenv("KC_VERIFIER_HOST");
 
             disableSSLCertificateChecking();
-
-
-            System.out.println("client=" + CLIENT);
-            System.out.println("host=" + HOST);
-            System.out.println("password=" + PASSWORD);
-            System.out.println("username=" + USERNAME);
 
         }
 
