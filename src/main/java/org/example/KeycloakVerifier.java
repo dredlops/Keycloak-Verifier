@@ -73,6 +73,11 @@ public class KeycloakVerifier {
                             vulnerabilityTwo v2= new vulnerabilityTwo();
                             isActive=v2.vulnerabilityTwo();
                             break;
+                        default:
+                            vulnerabilityGeneral v3 = new vulnerabilityGeneral();
+                            isActive=v3.vulnerabilityGeneral(cve.getString("cve"));
+                            break;
+
                     }
                     if (isActive){
                         //Creates a warning
