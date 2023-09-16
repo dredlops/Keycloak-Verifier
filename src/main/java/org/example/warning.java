@@ -14,7 +14,7 @@ public class warning {
 
     //Creates a warning in the specific format
     public String addWarning(String severity, String description, String solution, String cve){
-        String s = "{\"message\":\""+description+"\",\"severity\":\""+setSeverity(severity)+"\",\"description\":\""+solution+"\",\"filename\":\""+cve+"\"}";
+        String s = "{\"message\":\""+("cve: "+cve+" "+description)+"\",\"severity\":\""+setSeverity(severity)+"\",\"description\":\""+solution+"\"}";
         return s;
     }
 

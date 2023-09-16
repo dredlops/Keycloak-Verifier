@@ -2,8 +2,9 @@ package org.example;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
 
@@ -25,7 +26,7 @@ public class getCVE {
 
     public JSONArray get() throws IOException {
         URL url = new URL(URL_CVE);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("X-Api-Key", API_KEY);
 
