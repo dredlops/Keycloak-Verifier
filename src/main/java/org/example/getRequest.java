@@ -26,14 +26,19 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-
+/*
             PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
             USERNAME=System.getenv("KC_VERIFIER_USERNAME");
             CLIENT=System.getenv("KC_VERIFIER_CLIENT");
             HOST=System.getenv("KC_VERIFIER_HOST");
 
             disableSSLCertificateChecking();
+            */
 
+        PASSWORD="test";
+        USERNAME="testuser";
+        CLIENT="admin-cli";
+        HOST="http://0.0.0.0:8084/";
         }
 
 
@@ -43,13 +48,12 @@ public class getRequest {
 
     public String getToken() throws IOException{
         URL url = new URL(HOST+URL_TOKEN);
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
 
         conn.setRequestProperty("Accept","*/*");
-
         String jsonInputString = "username="+URLEncoder.encode(USERNAME, "UTF-8")+"&password="+URLEncoder.encode(PASSWORD, "UTF-8")+"&grant_type=password&client_id="+CLIENT;
 
 
@@ -69,7 +73,7 @@ public class getRequest {
     public String getVersion() throws IOException, URISyntaxException {
         String token = getToken();
         URL url = new URL(HOST+URL_VERSION);
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + token);
 
@@ -82,7 +86,7 @@ public class getRequest {
         return version;
     }
 
-    private String getResponse(HttpsURLConnection conn) {
+    private String getResponse(HttpURLConnection conn) {
         BufferedReader in;
         String output;
 

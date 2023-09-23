@@ -5,7 +5,7 @@
 
 {"fileName":"test.text", "lineRanges":[{"start":10}, {"end":220}, {}], "severity":"HIGH", "message":"an \"important\" message", "description":"an \"important\" description"}
 
-    {"fileName":"some.properties.text","severity":"NORMAL", "lineStart":10, "other":value, "additional": "stuff"}
+{"fileName":"some.properties.text","severity":"NORMAL", "lineStart":10, "other":value, "additional": "stuff"}
 {"fileName":"file.xml.txt","lineRanges":[{"start":11, "end":12, "other":10, "additionalProperties": "stuff"}, {"s":11, "e":12, "start":21, "end":22}]}
 
  # {"fileName":"comment.text","severity":"ERROR","lineStart":10,"description":"some comment"}

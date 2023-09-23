@@ -11,7 +11,7 @@
   { "cve": "CVE-2022-3782",
   "date": "01/13/2023",
   "message": "Keycloak: path traversal via double URL encoding. A flaw was found in Keycloak, where it does not properly validate URLs included in a redirect. An attacker can use this flaw to construct a malicious request to bypass validation and access other URLs and potentially sensitive information within the domain or possibly conduct further attacks. This flaw affects any client that utilizes a wildcard in the Valid Redirect URIs field.",
-  "solution": "Remove wildcard from redirect URI's or update version to 20.0.2",
+  "solution": "Remove wildcard from redirect URI's or update version",
   "good_version": "20.0.2",
   "url": "admin/realms/master/clients",
   "variable":["redirectUris"],
@@ -26,6 +26,7 @@
   "variable":["account-console","account"],
   "severity": "2.7"
 },
+
      { "cve": "CVE-2021-3754",
   "date": "02/11/2021",
   "message": "A flaw was found in keycloak where an attacker is able to register himself with the username same as the email ID of any existing user. This may cause trouble in getting password recovery email in case the user forgets the password.",
