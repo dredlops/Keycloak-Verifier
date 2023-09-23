@@ -38,7 +38,7 @@ public class getRequest {
         PASSWORD="test";
         USERNAME="testuser";
         CLIENT="admin-cli";
-        HOST="http://192.168.1.248:8080/auth/";
+        HOST="http://192.168.1.248:8084/";
         }
 
 
