@@ -26,16 +26,23 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-
+/*
             PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
             USERNAME=System.getenv("KC_VERIFIER_USERNAME");
             CLIENT=System.getenv("KC_VERIFIER_CLIENT");
             HOST=System.getenv("KC_VERIFIER_HOST");
 
             disableSSLCertificateChecking();
+*/
 
 
-        }
+        PASSWORD="test";
+        USERNAME="testuser";
+        CLIENT="admin-cli";
+        HOST="http://192.168.1.248:8084/";
+
+
+    }
 
 
 
