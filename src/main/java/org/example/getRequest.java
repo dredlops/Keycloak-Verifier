@@ -26,19 +26,15 @@ public class getRequest {
     private static final String URL_VERSION = "admin/serverinfo";
 
     public getRequest(){
-/*
+
             PASSWORD=System.getenv("KC_VERIFIER_PASSWORD");
             USERNAME=System.getenv("KC_VERIFIER_USERNAME");
             CLIENT=System.getenv("KC_VERIFIER_CLIENT");
             HOST=System.getenv("KC_VERIFIER_HOST");
 
             disableSSLCertificateChecking();
-            */
 
-        PASSWORD="test";
-        USERNAME="testuser";
-        CLIENT="admin-cli";
-        HOST="http://192.168.1.248:8084/";
+
         }
 
 
@@ -123,7 +119,7 @@ public class getRequest {
      * Disables the SSL certificate checking for new instances of {@link HttpsURLConnection} This has been created to
      * aid testing on a local box, not for use on production.
      */
-    private static void disableSSLCertificateChecking() {
+    public void disableSSLCertificateChecking() {
         TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
             public X509Certificate[] getAcceptedIssuers() {
                 return null;
