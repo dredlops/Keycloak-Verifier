@@ -9,7 +9,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-@Mojo(name="verifier", defaultPhase = LifecyclePhase.INITIALIZE)
+@Mojo(name="keycloakVerifier", defaultPhase = LifecyclePhase.INITIALIZE)
 public class main extends AbstractMojo {
 
 

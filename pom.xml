@@ -80,7 +80,7 @@
         <artifactId>maven-plugin-plugin</artifactId>
         <version>3.9.0</version>
         <configuration>
-          <goalPrefix>verifier</goalPrefix>
+          <goalPrefix>keycloakVerifier</goalPrefix>
           <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
         </configuration>
         <executions>
