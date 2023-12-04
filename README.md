@@ -109,3 +109,7 @@ Run Plugin
 ```
 
 But first, create a ".properties" file with the environment variables.  
+## License
+
+[GNU](https://choosealicense.com/licenses/gpl-3.0/)
+
