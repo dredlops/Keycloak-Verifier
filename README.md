@@ -79,7 +79,7 @@ pipeline {
 }
 ```
 ## Interface Example
-![alt text](https://github.com/dredlops/Keycloak-Verifier.git/g.png)
+![alt text](https://github.com/dredlops/Keycloak-Verifier/blob/main/g.png)
 ## Authors
 
 - [@dredlops](https://www.github.com/dredlops)
