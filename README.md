@@ -79,8 +79,33 @@ pipeline {
 }
 ```
 ## Interface Example
+
+Here is an example from Warnings NG in Jenkins, running Keycloak Verifier.
+
 ![alt text](https://github.com/dredlops/Keycloak-Verifier/blob/main/g.png)
 ## Authors
 
 - [@dredlops](https://www.github.com/dredlops)
 
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/dredlops/Keycloak-Verifier.git
+```
+
+Install Plugin
+
+```bash
+  mvn clean install
+```
+
+Run Plugin
+
+```bash
+  mvn org.example:teste-plugin:test
+```
+
+But first, create a ".properties" file with the environment variables.  
