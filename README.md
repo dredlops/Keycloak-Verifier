@@ -24,6 +24,9 @@ To run this project, you will need to add the following environment variables to
 
 `KC_VERIFIER_HOST` -> url of Keycloak instance (must end with /)
 
+`KC_VERIFIER_API_KEY` -> API Key for CVE search API
+
+
 These can also be declared in Jenkins.
 
 ## Deployment
