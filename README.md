@@ -29,6 +29,12 @@ To run this project, you will need to add the following environment variables to
 
 These can also be declared in Jenkins.
 
+## CVE Search API
+
+In order to obtain the existing vulnerabilities, the plugin will use the API described at the following link: https://docs.cvesearch.com.
+Through this API it will be possible to update known vulnerabilities, although its use is not mandatory, since the project already includes a small database with the vulnerabilities known to date.
+However, in order to use the API it will be necessary to request an API-KEY, as can be seen in the API documentation.
+
 ## Deployment
 
 To deploy this project run
